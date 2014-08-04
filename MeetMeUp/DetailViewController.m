@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "WebViewController.h"
 
 @interface DetailViewController ()
 
@@ -34,6 +35,12 @@
 	self.eventDescriptionTextView.text = self.event[@"description"];
 
 	self.urlLabel.text = self.event[@"event_url"];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	WebViewController *webVC = (WebViewController *)segue.destinationViewController;
+	webVC.urlString = self.event[@"event_url"];
 }
 
 @end

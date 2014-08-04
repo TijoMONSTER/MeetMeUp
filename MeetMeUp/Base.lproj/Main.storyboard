@@ -69,6 +69,7 @@
         <!--Detail View Controller - Event-->
         <scene sceneID="ZoN-8c-kYo">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ej9-SN-tX6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="vKz-zW-K3L" customClass="DetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DcJ-fY-Y5M"/>
@@ -164,10 +165,9 @@
                         <outlet property="urlLabel" destination="VQx-bv-UN2" id="d5M-b4-54U"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ej9-SN-tX6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="VpU-fw-FUQ">
                     <connections>
-                        <segue destination="gmh-De-pk7" kind="modal" id="qtl-Os-WtS"/>
+                        <segue destination="gmh-De-pk7" kind="modal" modalTransitionStyle="crossDissolve" id="qtl-Os-WtS"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -184,13 +184,37 @@
                     <view key="view" contentMode="scaleToFill" id="dMo-OK-qKA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0JO-Uk-ffK">
+                                <rect key="frame" x="0.0" y="63" width="320" height="505"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zTX-Uo-Sp0">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZ8-8S-qdi">
+                                        <rect key="frame" x="254" y="25" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="79h-k5-qSs"/>
+                    <connections>
+                        <outlet property="webView" destination="0JO-Uk-ffK" id="Ukp-Mr-Ae7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x08-lN-Zha" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1358" y="531"/>
+            <point key="canvasLocation" x="1345" y="531"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yVa-HX-fwt">
@@ -209,6 +233,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HCj-m1-RVs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="80" y="531"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="3rG-bH-HfL">
+            <objects>
+                <viewController id="urE-C8-0of" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UE9-4N-dU3"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zhx-JS-Z60"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ton-FS-IuR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RK6-BE-ZmW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
