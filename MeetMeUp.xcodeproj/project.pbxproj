@@ -21,6 +21,7 @@
 		2C086990199003AA004BC570 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C086972199003AA004BC570 /* UIKit.framework */; };
 		2C086998199003AA004BC570 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C086996199003AA004BC570 /* InfoPlist.strings */; };
 		2C08699A199003AA004BC570 /* MeetMeUpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C086999199003AA004BC570 /* MeetMeUpTests.m */; };
+		2C0869A519901AE3004BC570 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0869A419901AE3004BC570 /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		2C086995199003AA004BC570 /* MeetMeUpTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MeetMeUpTests-Info.plist"; sourceTree = "<group>"; };
 		2C086997199003AA004BC570 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2C086999199003AA004BC570 /* MeetMeUpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetMeUpTests.m; sourceTree = "<group>"; };
+		2C0869A319901AE3004BC570 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		2C0869A419901AE3004BC570 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 				2C086980199003AA004BC570 /* Main.storyboard */,
 				2C086983199003AA004BC570 /* ViewController.h */,
 				2C086984199003AA004BC570 /* ViewController.m */,
+				2C0869A319901AE3004BC570 /* DetailViewController.h */,
+				2C0869A419901AE3004BC570 /* DetailViewController.m */,
 				2C086986199003AA004BC570 /* Images.xcassets */,
 				2C086975199003AA004BC570 /* Supporting Files */,
 			);
@@ -252,6 +257,7 @@
 				2C086985199003AA004BC570 /* ViewController.m in Sources */,
 				2C08697F199003AA004BC570 /* AppDelegate.m in Sources */,
 				2C08697B199003AA004BC570 /* main.m in Sources */,
+				2C0869A519901AE3004BC570 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
