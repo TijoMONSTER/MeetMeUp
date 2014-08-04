@@ -8,7 +8,10 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property NSArray *events;
 
 @end
 
@@ -22,11 +25,28 @@
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
 	[NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
 
-		NSString *decodedString = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-		NSLog(@"%@", decodedString);
-
+		NSDictionary *decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+		self.events = decodedJSON[@"results"];
+		[self.tableView reloadData];
 		NSLog(@"Huzzah!");
 	}];
+}
+
+#pragma mark UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	return [self.events count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
+	NSDictionary *event = self.events[indexPath.row];
+	NSDictionary *venue = event[@"venue"];
+
+	cell.textLabel.text = event[@"name"];
+	cell.detailTextLabel.text = venue[@"address_1"];
+	return cell;
 }
 
 @end
