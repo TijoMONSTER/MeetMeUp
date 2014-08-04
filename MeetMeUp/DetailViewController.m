@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *rsvpCountsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *hostingGroupInfoLabel;
 @property (weak, nonatomic) IBOutlet UITextView *eventDescriptionTextView;
+@property (weak, nonatomic) IBOutlet UILabel *urlLabel;
 
 @end
 
@@ -31,6 +32,8 @@
 	self.eventDescriptionTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
 	self.eventDescriptionTextView.layer.borderWidth = 1.0f;
 	self.eventDescriptionTextView.text = self.event[@"description"];
+
+	self.urlLabel.text = self.event[@"event_url"];
 }
 
 @end

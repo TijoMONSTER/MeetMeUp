@@ -92,6 +92,24 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AoE-aj-liA">
+                                <rect key="frame" x="20" y="416" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQx-bv-UN2">
+                                <rect key="frame" x="20" y="445" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="VpU-fw-FUQ" appends="YES" id="vqa-sJ-GnR"/>
+                                </connections>
+                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RSVP Counts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heS-MI-jcL">
                                 <rect key="frame" x="20" y="135" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -143,11 +161,36 @@
                         <outlet property="eventNameLabel" destination="woe-Jj-IQQ" id="wae-8U-628"/>
                         <outlet property="hostingGroupInfoLabel" destination="mLx-Yl-6ar" id="I4R-0o-5LM"/>
                         <outlet property="rsvpCountsLabel" destination="11x-c0-PEo" id="RHt-sv-0Nf"/>
+                        <outlet property="urlLabel" destination="VQx-bv-UN2" id="d5M-b4-54U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ej9-SN-tX6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="VpU-fw-FUQ">
+                    <connections>
+                        <segue destination="gmh-De-pk7" kind="modal" id="qtl-Os-WtS"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="932" y="531"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="Fxf-ho-1c6">
+            <objects>
+                <viewController id="gmh-De-pk7" customClass="WebViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3o5-qJ-sje"/>
+                        <viewControllerLayoutGuide type="bottom" id="nNr-s8-I70"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dMo-OK-qKA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="79h-k5-qSs"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x08-lN-Zha" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1358" y="531"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yVa-HX-fwt">

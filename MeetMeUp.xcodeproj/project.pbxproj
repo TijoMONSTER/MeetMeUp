@@ -22,6 +22,7 @@
 		2C086998199003AA004BC570 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C086996199003AA004BC570 /* InfoPlist.strings */; };
 		2C08699A199003AA004BC570 /* MeetMeUpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C086999199003AA004BC570 /* MeetMeUpTests.m */; };
 		2C0869A519901AE3004BC570 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0869A419901AE3004BC570 /* DetailViewController.m */; };
+		2C0869A819903176004BC570 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0869A719903176004BC570 /* WebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		2C086999199003AA004BC570 /* MeetMeUpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetMeUpTests.m; sourceTree = "<group>"; };
 		2C0869A319901AE3004BC570 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		2C0869A419901AE3004BC570 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		2C0869A619903176004BC570 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		2C0869A719903176004BC570 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 				2C0869A419901AE3004BC570 /* DetailViewController.m */,
 				2C086986199003AA004BC570 /* Images.xcassets */,
 				2C086975199003AA004BC570 /* Supporting Files */,
+				2C0869A619903176004BC570 /* WebViewController.h */,
+				2C0869A719903176004BC570 /* WebViewController.m */,
 			);
 			path = MeetMeUp;
 			sourceTree = "<group>";
@@ -255,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C086985199003AA004BC570 /* ViewController.m in Sources */,
+				2C0869A819903176004BC570 /* WebViewController.m in Sources */,
 				2C08697F199003AA004BC570 /* AppDelegate.m in Sources */,
 				2C08697B199003AA004BC570 /* main.m in Sources */,
 				2C0869A519901AE3004BC570 /* DetailViewController.m in Sources */,
@@ -462,6 +468,7 @@
 				2C08699F199003AA004BC570 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C0869A0199003AA004BC570 /* Build configuration list for PBXNativeTarget "MeetMeUpTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +477,7 @@
 				2C0869A2199003AA004BC570 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
