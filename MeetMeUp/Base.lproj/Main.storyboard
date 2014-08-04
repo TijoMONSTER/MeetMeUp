@@ -51,7 +51,6 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="Vrz-du-OHh"/>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="B9J-bl-ok5"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -167,7 +166,7 @@
                 </viewController>
                 <tapGestureRecognizer id="VpU-fw-FUQ">
                     <connections>
-                        <segue destination="gmh-De-pk7" kind="modal" modalTransitionStyle="crossDissolve" id="qtl-Os-WtS"/>
+                        <segue destination="gmh-De-pk7" kind="modal" modalTransitionStyle="flipHorizontal" id="qtl-Os-WtS"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -189,17 +188,45 @@
                                 <rect key="frame" x="0.0" y="63" width="320" height="505"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="gmh-De-pk7" id="VfJ-sc-RLh"/>
+                                </connections>
                             </webView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zTX-Uo-Sp0">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZ8-8S-qdi">
-                                        <rect key="frame" x="254" y="25" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZ8-8S-qdi">
+                                        <rect key="frame" x="289" y="21" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button">
+                                        <state key="normal" image="forward">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="disabled" image="forward_not_active"/>
+                                        <connections>
+                                            <action selector="onForwardButtonPressed:" destination="gmh-De-pk7" eventType="touchUpInside" id="Eq9-fU-VYk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Rn-EZ-dVQ">
+                                        <rect key="frame" x="255" y="21" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="back">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="disabled" image="back_not_active"/>
+                                        <connections>
+                                            <action selector="onBackButtonPressed:" destination="gmh-De-pk7" eventType="touchUpInside" id="p4Q-Ci-JKd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCT-4N-d9D">
+                                        <rect key="frame" x="20" y="21" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Done">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="7GZ-4Q-xmc" kind="unwind" unwindAction="unwindFromWebView:" id="jRA-xL-4GR"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -209,10 +236,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="79h-k5-qSs"/>
                     <connections>
+                        <outlet property="backButton" destination="2Rn-EZ-dVQ" id="03E-A9-yU7"/>
+                        <outlet property="forwardButton" destination="pZ8-8S-qdi" id="oVc-st-0FQ"/>
                         <outlet property="webView" destination="0JO-Uk-ffK" id="Ukp-Mr-Ae7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x08-lN-Zha" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="7GZ-4Q-xmc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1345" y="531"/>
         </scene>
@@ -234,24 +264,13 @@
             </objects>
             <point key="canvasLocation" x="80" y="531"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="3rG-bH-HfL">
-            <objects>
-                <viewController id="urE-C8-0of" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="UE9-4N-dU3"/>
-                        <viewControllerLayoutGuide type="bottom" id="Zhx-JS-Z60"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ton-FS-IuR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RK6-BE-ZmW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
+    <resources>
+        <image name="back" width="25" height="25"/>
+        <image name="back_not_active" width="25" height="25"/>
+        <image name="forward" width="25" height="25"/>
+        <image name="forward_not_active" width="25" height="25"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -37,10 +37,19 @@
 	self.urlLabel.text = self.event[@"event_url"];
 }
 
+#pragma mark Segues
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 	WebViewController *webVC = (WebViewController *)segue.destinationViewController;
 	webVC.urlString = self.event[@"event_url"];
+}
+
+#pragma mark IBActions
+
+- (IBAction)unwindFromWebView:(UIStoryboardSegue *)segue
+{
+
 }
 
 @end
