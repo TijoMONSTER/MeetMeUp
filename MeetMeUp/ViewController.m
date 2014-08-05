@@ -49,7 +49,10 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 	[textField resignFirstResponder];
-	[self loadSearchResultsWithKeyword:self.searchTextField.text];
+
+	if ([textField.text length] > 0) {
+		[self loadSearchResultsWithKeyword:self.searchTextField.text];
+	}
 	return YES;
 }
 
