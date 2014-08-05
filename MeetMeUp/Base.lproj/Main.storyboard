@@ -24,7 +24,7 @@
                                     <rect key="frame" x="0.0" y="64" width="320" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" returnKeyType="go"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                 </textField>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cellID" textLabel="udx-Bi-viB" detailTextLabel="TS9-GU-A7j" style="IBUITableViewCellStyleSubtitle" id="7XV-I9-HvB">
