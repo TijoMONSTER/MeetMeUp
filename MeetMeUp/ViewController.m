@@ -64,14 +64,9 @@
 				UIImage *thumbImage = [UIImage imageWithData:imageData];
 
 				dispatch_async(dispatch_get_main_queue(), ^{
-					// cache image
-					if (thumbImage) {
 						self.eventsThumbImages[eventId] = thumbImage;
 						cell.imageView.image = thumbImage;
 						[tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-					} else {
-//						NSLog(@"no image for event id: %@ %@", eventId, hostingGroupPhoto);
-					}
 				});
 			});
 		} else {
@@ -130,6 +125,8 @@
 			NSDictionary *decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
 			self.events = decodedJSON[@"results"];
 			[self.tableView reloadData];
+
+			self.tableView.userInteractionEnabled = YES;
 			NSLog(@"Huzzah!");
 		} else {
 			NSLog(@"Error %@", [connectionError localizedDescription]);
