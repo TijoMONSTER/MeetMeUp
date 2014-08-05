@@ -12,7 +12,9 @@
 @interface ViewController () <UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property NSArray *events;
+@property UIActivityIndicatorView *activityIndicatorView;
 
 @end
 
@@ -21,6 +23,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+	UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	activityIndicatorView.center = self.view.center;
+	[activityIndicatorView startAnimating];
+	[self.view addSubview:activityIndicatorView];
 
 	NSURL *url = [NSURL URLWithString:@"https://api.meetup.com/2/open_events.json?zip=60604&text=mobile&text_format=plain&time=,1w&key=351723317853a106e26501915763d41"];
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
@@ -34,6 +41,9 @@
 		} else {
 			NSLog(@"Error %@", [connectionError localizedDescription]);
 		}
+
+		[activityIndicatorView stopAnimating];
+		[activityIndicatorView removeFromSuperview];
 	}];
 }
 
