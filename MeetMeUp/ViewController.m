@@ -16,6 +16,8 @@
 @property NSArray *events;
 @property UIActivityIndicatorView *activityIndicatorView;
 
+@property NSMutableDictionary *eventsThumbImages;
+
 @end
 
 @implementation ViewController
@@ -23,6 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	self.eventsThumbImages = [NSMutableDictionary dictionary];
 	self.searchTextField.delegate = self;
 	[self loadSearchResultsWithKeyword:self.searchTextField.text];
 }
@@ -41,6 +44,43 @@
 
 	cell.textLabel.text = event[@"name"];
 	cell.detailTextLabel.text = venue[@"address_1"];
+
+	NSString *eventId = event[@"id"];
+	NSDictionary *hostingGroup = event[@"group"];
+	NSDictionary *hostingGroupPhoto = hostingGroup[@"group_photo"];
+
+	if (hostingGroupPhoto) {
+		NSString *thumbImageURLString = hostingGroupPhoto[@"thumb_link"];
+
+		// load image
+		if (!self.eventsThumbImages[eventId]) {
+			// set placeholder
+			cell.imageView.image = [self imagePlaceHolder];
+
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul), ^{
+
+				NSURL *imageURL = [NSURL URLWithString:thumbImageURLString];
+				NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+				UIImage *thumbImage = [UIImage imageWithData:imageData];
+
+				dispatch_async(dispatch_get_main_queue(), ^{
+					// cache image
+					if (thumbImage) {
+						self.eventsThumbImages[eventId] = thumbImage;
+						cell.imageView.image = thumbImage;
+						[tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+					} else {
+//						NSLog(@"no image for event id: %@ %@", eventId, hostingGroupPhoto);
+					}
+				});
+			});
+		} else {
+			cell.imageView.image = self.eventsThumbImages[eventId];
+		}
+	} else {
+		cell.imageView.image = [self imagePlaceHolder];
+	}
+
 	return cell;
 }
 
@@ -80,7 +120,8 @@
 	[self.activityIndicatorView startAnimating];
 	[self.view addSubview:self.activityIndicatorView];
 
-	NSString *urlString = [NSString stringWithFormat:@"https://api.meetup.com/2/open_events.json?zip=60604&text=%@&fields=group_photo&time=,1w&key=351723317853a106e26501915763d41", keyword];
+	NSString *urlString = [NSString stringWithFormat:@"https://api.meetup.com/2/open_events.json?zip=60604&text=%@&text_format=plain&fields=group_photo&time=,1w&key=351723317853a106e26501915763d41", keyword];
+
 	NSURL *url = [NSURL URLWithString:urlString];
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
 	[NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
@@ -97,6 +138,11 @@
 		[self.activityIndicatorView stopAnimating];
 		[self.activityIndicatorView removeFromSuperview];
 	}];
+}
+
+- (UIImage *)imagePlaceHolder
+{
+	return [UIImage imageNamed:@"event_placeholder"];
 }
 
 @end
