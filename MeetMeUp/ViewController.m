@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "DetailViewController.h"
 
-@interface ViewController () <UITableViewDataSource>
+@interface ViewController () <UITableViewDataSource, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
@@ -23,28 +23,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-	UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-	activityIndicatorView.center = self.view.center;
-	[activityIndicatorView startAnimating];
-	[self.view addSubview:activityIndicatorView];
-
-	NSURL *url = [NSURL URLWithString:@"https://api.meetup.com/2/open_events.json?zip=60604&text=mobile&text_format=plain&time=,1w&key=351723317853a106e26501915763d41"];
-	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-	[NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-
-		if (connectionError == nil) {
-			NSDictionary *decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-			self.events = decodedJSON[@"results"];
-			[self.tableView reloadData];
-			NSLog(@"Huzzah!");
-		} else {
-			NSLog(@"Error %@", [connectionError localizedDescription]);
-		}
-
-		[activityIndicatorView stopAnimating];
-		[activityIndicatorView removeFromSuperview];
-	}];
+	self.searchTextField.delegate = self;
+	[self loadSearchResultsWithKeyword:self.searchTextField.text];
 }
 
 #pragma mark UITableViewDataSource
@@ -64,6 +44,15 @@
 	return cell;
 }
 
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	[textField resignFirstResponder];
+	[self loadSearchResultsWithKeyword:self.searchTextField.text];
+	return YES;
+}
+
 #pragma mark Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -76,6 +65,35 @@
 
 		[self.tableView deselectRowAtIndexPath:selectedCellIndexPath animated:NO];
 	}
+}
+
+#pragma mark Helper methods
+
+- (void)loadSearchResultsWithKeyword:(NSString *)keyword
+{
+	//show activity indicator
+	self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	self.activityIndicatorView.center = self.view.center;
+	[self.activityIndicatorView startAnimating];
+	[self.view addSubview:self.activityIndicatorView];
+
+	NSString *urlString = [NSString stringWithFormat:@"https://api.meetup.com/2/open_events.json?zip=60604&text=%@&text_format=plain&time=,1w&key=351723317853a106e26501915763d41", keyword];
+	NSURL *url = [NSURL URLWithString:urlString];
+	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+	[NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+
+		if (connectionError == nil) {
+			NSDictionary *decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+			self.events = decodedJSON[@"results"];
+			[self.tableView reloadData];
+			NSLog(@"Huzzah!");
+		} else {
+			NSLog(@"Error %@", [connectionError localizedDescription]);
+		}
+
+		[self.activityIndicatorView stopAnimating];
+		[self.activityIndicatorView removeFromSuperview];
+	}];
 }
 
 @end
