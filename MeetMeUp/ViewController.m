@@ -80,7 +80,7 @@
 	[self.activityIndicatorView startAnimating];
 	[self.view addSubview:self.activityIndicatorView];
 
-	NSString *urlString = [NSString stringWithFormat:@"https://api.meetup.com/2/open_events.json?zip=60604&text=%@&text_format=plain&time=,1w&key=351723317853a106e26501915763d41", keyword];
+	NSString *urlString = [NSString stringWithFormat:@"https://api.meetup.com/2/open_events.json?zip=60604&text=%@&fields=group_photo&time=,1w&key=351723317853a106e26501915763d41", keyword];
 	NSURL *url = [NSURL URLWithString:urlString];
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
 	[NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
