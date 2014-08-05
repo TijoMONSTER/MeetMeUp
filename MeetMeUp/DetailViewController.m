@@ -9,7 +9,7 @@
 #import "DetailViewController.h"
 #import "WebViewController.h"
 
-@interface DetailViewController () <UITableViewDataSource>
+@interface DetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *eventNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rsvpCountsLabel;
@@ -81,12 +81,44 @@
 	return cell;
 }
 
+#pragma mark UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	[tableView deselectRowAtIndexPath:indexPath animated:NO];
+
+	NSDictionary *comment = self.comments[indexPath.row];
+
+	NSString *groupID = comment[@"group_id"];
+	NSString *memberID = comment[@"member_id"];
+
+	// get profile url
+	NSString *urlString = [NSString stringWithFormat:@"https://api.meetup.com/2/profile/%@/%@?&sign=true&key=351723317853a106e26501915763d41", groupID, memberID];
+	NSURL *url = [NSURL URLWithString:urlString];
+	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+	[NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+
+		if (connectionError == nil) {
+			NSDictionary *decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+			[self performSegueWithIdentifier:@"showUserProfileSegue" sender:decodedJSON[@"profile_url"]];
+		} else {
+			NSLog(@"Error getting user profile %@", [connectionError localizedDescription]);
+		}
+	}];
+}
+
 #pragma mark Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 	WebViewController *webVC = (WebViewController *)segue.destinationViewController;
-	webVC.urlString = self.event[@"event_url"];
+
+	if ([segue.identifier isEqualToString:@"showEventWebPageSegue"]) {
+		webVC.urlString = self.event[@"event_url"];
+	}
+	else if ([segue.identifier isEqualToString:@"showUserProfileSegue"]) {
+		webVC.urlString = sender;
+	}
 }
 
 #pragma mark IBActions

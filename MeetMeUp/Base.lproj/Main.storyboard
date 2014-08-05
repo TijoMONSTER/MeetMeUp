@@ -196,6 +196,7 @@
                                         </prototypes>
                                         <connections>
                                             <outlet property="dataSource" destination="vKz-zW-K3L" id="6pL-k6-AtQ"/>
+                                            <outlet property="delegate" destination="vKz-zW-K3L" id="tDQ-ly-rdo"/>
                                         </connections>
                                     </tableView>
                                 </subviews>
@@ -216,12 +217,13 @@
                         <outlet property="hostingGroupInfoLabel" destination="mLx-Yl-6ar" id="I4R-0o-5LM"/>
                         <outlet property="rsvpCountsLabel" destination="11x-c0-PEo" id="RHt-sv-0Nf"/>
                         <outlet property="urlLabel" destination="VQx-bv-UN2" id="d5M-b4-54U"/>
+                        <segue destination="gmh-De-pk7" kind="modal" identifier="showUserProfileSegue" id="Wc9-B7-7QW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ej9-SN-tX6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="VpU-fw-FUQ">
                     <connections>
-                        <segue destination="gmh-De-pk7" kind="modal" modalTransitionStyle="flipHorizontal" id="qtl-Os-WtS"/>
+                        <segue destination="gmh-De-pk7" kind="modal" identifier="showEventWebPageSegue" modalTransitionStyle="flipHorizontal" id="qtl-Os-WtS"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -327,4 +329,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Wc9-B7-7QW"/>
+    </inferredMetricsTieBreakers>
 </document>
