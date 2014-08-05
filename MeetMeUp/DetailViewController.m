@@ -9,13 +9,16 @@
 #import "DetailViewController.h"
 #import "WebViewController.h"
 
-@interface DetailViewController ()
+@interface DetailViewController () <UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UILabel *eventNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rsvpCountsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *hostingGroupInfoLabel;
 @property (weak, nonatomic) IBOutlet UITextView *eventDescriptionTextView;
 @property (weak, nonatomic) IBOutlet UILabel *urlLabel;
+@property (weak, nonatomic) IBOutlet UITableView *commentsTableView;
+
+@property NSArray *comments;
 
 @end
 
@@ -35,6 +38,47 @@
 	self.eventDescriptionTextView.text = self.event[@"description"];
 
 	self.urlLabel.text = self.event[@"event_url"];
+
+	// get comments
+	NSString *urlString = [NSString stringWithFormat:@"http://api.meetup.com/2/event_comments?event_id=%@&order=time&desc=desc&offset=0&format=json&key=351723317853a106e26501915763d41", self.event[@"id"]];
+	NSURL *url = [NSURL URLWithString:urlString];
+	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+	[NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+
+		if (connectionError == nil) {
+			NSDictionary *decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+			self.comments = decodedJSON[@"results"];
+			[self.commentsTableView reloadData];
+			NSLog(@"event id %@", self.event[@"id"]);
+
+			self.commentsTableView.userInteractionEnabled = YES;
+		} else {
+			NSLog(@"Error getting comments %@", [connectionError localizedDescription]);
+		}
+	}];
+}
+
+#pragma mark UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	return [self.comments count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
+	NSDictionary *comment = self.comments[indexPath.row];
+
+	cell.textLabel.text = comment[@"comment"];
+
+	NSString *epoch = comment[@"time"];
+	NSDate *date = [NSDate dateWithTimeIntervalSince1970:[epoch doubleValue] / 1000];
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", comment[@"member_name"], [dateFormatter stringFromDate:date]];
+
+	return cell;
 }
 
 #pragma mark Segues

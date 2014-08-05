@@ -26,7 +26,6 @@
 {
     [super viewDidLoad];
 	self.eventsThumbImages = [NSMutableDictionary dictionary];
-	self.searchTextField.delegate = self;
 	[self loadSearchResultsWithKeyword:self.searchTextField.text];
 }
 

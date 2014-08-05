@@ -125,10 +125,10 @@
 				2C086984199003AA004BC570 /* ViewController.m */,
 				2C0869A319901AE3004BC570 /* DetailViewController.h */,
 				2C0869A419901AE3004BC570 /* DetailViewController.m */,
-				2C086986199003AA004BC570 /* Images.xcassets */,
-				2C086975199003AA004BC570 /* Supporting Files */,
 				2C0869A619903176004BC570 /* WebViewController.h */,
 				2C0869A719903176004BC570 /* WebViewController.m */,
+				2C086986199003AA004BC570 /* Images.xcassets */,
+				2C086975199003AA004BC570 /* Supporting Files */,
 			);
 			path = MeetMeUp;
 			sourceTree = "<group>";
