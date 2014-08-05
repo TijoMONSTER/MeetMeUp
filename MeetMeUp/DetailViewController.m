@@ -41,21 +41,22 @@
 
 	// get comments
 	NSString *urlString = [NSString stringWithFormat:@"http://api.meetup.com/2/event_comments?event_id=%@&order=time&desc=desc&offset=0&format=json&key=351723317853a106e26501915763d41", self.event[@"id"]];
-	NSURL *url = [NSURL URLWithString:urlString];
-	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-	[NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+	[NSURLConnection sendAsynchronousRequest:urlRequest
+									   queue:[NSOperationQueue mainQueue]
+						   completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
 
-		if (connectionError == nil) {
-			NSDictionary *decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-			self.comments = decodedJSON[@"results"];
-			[self.commentsTableView reloadData];
-			NSLog(@"event id %@", self.event[@"id"]);
+							   if (connectionError == nil) {
+								   NSDictionary *decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+								   self.comments = decodedJSON[@"results"];
+								   [self.commentsTableView reloadData];
+								   NSLog(@"event id %@", self.event[@"id"]);
 
-			self.commentsTableView.userInteractionEnabled = YES;
-		} else {
-			NSLog(@"Error getting comments %@", [connectionError localizedDescription]);
-		}
-	}];
+								   self.commentsTableView.userInteractionEnabled = YES;
+							   } else {
+								   NSLog(@"Error getting comments %@", [connectionError localizedDescription]);
+							   }
+						   }];
 }
 
 #pragma mark UITableViewDataSource
@@ -94,17 +95,18 @@
 
 	// get profile url
 	NSString *urlString = [NSString stringWithFormat:@"https://api.meetup.com/2/profile/%@/%@?&sign=true&key=351723317853a106e26501915763d41", groupID, memberID];
-	NSURL *url = [NSURL URLWithString:urlString];
-	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-	[NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+	[NSURLConnection sendAsynchronousRequest:urlRequest
+									   queue:[NSOperationQueue mainQueue]
+						   completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
 
-		if (connectionError == nil) {
-			NSDictionary *decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-			[self performSegueWithIdentifier:@"showUserProfileSegue" sender:decodedJSON[@"profile_url"]];
-		} else {
-			NSLog(@"Error getting user profile %@", [connectionError localizedDescription]);
-		}
-	}];
+							   if (connectionError == nil) {
+								   NSDictionary *decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+								   [self performSegueWithIdentifier:@"showUserProfileSegue" sender:decodedJSON[@"profile_url"]];
+							   } else {
+								   NSLog(@"Error getting user profile %@", [connectionError localizedDescription]);
+							   }
+						   }];
 }
 
 #pragma mark Segues
@@ -125,7 +127,6 @@
 
 - (IBAction)unwindFromWebView:(UIStoryboardSegue *)segue
 {
-
 }
 
 @end

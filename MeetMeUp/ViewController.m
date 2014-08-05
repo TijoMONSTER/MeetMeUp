@@ -63,9 +63,9 @@
 				UIImage *thumbImage = [UIImage imageWithData:imageData];
 
 				dispatch_async(dispatch_get_main_queue(), ^{
-						self.eventsThumbImages[eventId] = thumbImage;
-						cell.imageView.image = thumbImage;
-						[tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+					self.eventsThumbImages[eventId] = thumbImage;
+					cell.imageView.image = thumbImage;
+					[tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 				});
 			});
 		} else {
@@ -118,22 +118,24 @@
 
 	NSURL *url = [NSURL URLWithString:urlString];
 	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-	[NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+	[NSURLConnection sendAsynchronousRequest:urlRequest
+									   queue:[NSOperationQueue mainQueue]
+						   completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
 
-		if (connectionError == nil) {
-			NSDictionary *decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-			self.events = decodedJSON[@"results"];
-			[self.tableView reloadData];
+							   if (connectionError == nil) {
+								   NSDictionary *decodedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+								   self.events = decodedJSON[@"results"];
+								   [self.tableView reloadData];
 
-			self.tableView.userInteractionEnabled = YES;
-			NSLog(@"Huzzah!");
-		} else {
-			NSLog(@"Error %@", [connectionError localizedDescription]);
-		}
+								   self.tableView.userInteractionEnabled = YES;
+								   NSLog(@"Huzzah!");
+							   } else {
+								   NSLog(@"Error %@", [connectionError localizedDescription]);
+							   }
 
-		[self.activityIndicatorView stopAnimating];
-		[self.activityIndicatorView removeFromSuperview];
-	}];
+							   [self.activityIndicatorView stopAnimating];
+							   [self.activityIndicatorView removeFromSuperview];
+						   }];
 }
 
 - (UIImage *)imagePlaceHolder
