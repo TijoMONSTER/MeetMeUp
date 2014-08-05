@@ -20,9 +20,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <textField key="tableHeaderView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" minimumFontSize="17" clearButtonMode="whileEditing" id="iJq-Bm-LZr">
+                                    <rect key="frame" x="0.0" y="64" width="320" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="go"/>
+                                </textField>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cellID" textLabel="udx-Bi-viB" detailTextLabel="TS9-GU-A7j" style="IBUITableViewCellStyleSubtitle" id="7XV-I9-HvB">
-                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="116" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7XV-I9-HvB" id="l0c-aR-avl">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -68,7 +74,6 @@
         <!--Detail View Controller - Event-->
         <scene sceneID="ZoN-8c-kYo">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ej9-SN-tX6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="vKz-zW-K3L" customClass="DetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DcJ-fY-Y5M"/>
@@ -164,6 +169,7 @@
                         <outlet property="urlLabel" destination="VQx-bv-UN2" id="d5M-b4-54U"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ej9-SN-tX6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="VpU-fw-FUQ">
                     <connections>
                         <segue destination="gmh-De-pk7" kind="modal" modalTransitionStyle="flipHorizontal" id="qtl-Os-WtS"/>
